@@ -1,8 +1,14 @@
 package core.basesyntax.model;
 
+import jakarta.persistence.OneToOne;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 public class Message {
     private Long id;
     private String content;
+    @OneToOne
+    @Cascade(value = CascadeType.ALL)
     private MessageDetails messageDetails;
 
     public Long getId() {

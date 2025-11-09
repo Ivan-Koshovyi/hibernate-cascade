@@ -36,14 +36,14 @@ public class SmileDaoImpl extends AbstractDao implements SmileDao {
 
     @Override
     public Smile get(Long id) {
-        try (Session session = factory.openSession()){
+        try (Session session = factory.openSession()) {
             return session.find(Smile.class, id);
         }
     }
 
     @Override
     public List<Smile> getAll() {
-        try (Session session = factory.openSession()){
+        try (Session session = factory.openSession()) {
             return session.createQuery("FIND Smile",Smile.class).list();
         }
     }

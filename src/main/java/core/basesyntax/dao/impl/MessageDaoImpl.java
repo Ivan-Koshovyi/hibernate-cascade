@@ -50,8 +50,16 @@ public class MessageDaoImpl extends AbstractDao implements MessageDao {
 
     @Override
     public void remove(Message entity) {
+        Transaction transaction = null;
         try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
             session.remove(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Can't delete " + entity + " with DB", e);
         }
     }
 }
